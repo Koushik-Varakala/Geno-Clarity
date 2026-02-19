@@ -106,8 +106,30 @@ export async function POST(req: NextRequest) {
         const decoder = new TextDecoder('utf-8');
         const vcfString = decoder.decode(arrayBuffer);
 
+        // Server-side VCF content validation
+        if (!vcfString.includes('##fileformat=VCF')) {
+            return NextResponse.json(
+                {
+                    error: 'Invalid VCF content',
+                    message: 'File does not appear to be a valid VCF. No "##fileformat=VCF" header was detected. Please upload a properly formatted Variant Call Format file.'
+                },
+                { status: 422 }
+            );
+        }
+
         // 1. Parse VCF
         const variants = parseVCF(vcfString);
+
+        // Additional check: if parsing extracted no variants at all
+        if (variants.length === 0) {
+            return NextResponse.json(
+                {
+                    error: 'Invalid VCF content',
+                    message: 'No variant records were detected in the uploaded file. The VCF header was found but the file contains no variant data rows. Please check your file and try again.'
+                },
+                { status: 422 }
+            );
+        }
 
         // 2. Generate PGx Profile
         const profile = generatePharmacogenomicProfile(variants);
