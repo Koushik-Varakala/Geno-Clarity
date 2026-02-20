@@ -47,7 +47,7 @@ function ExpandableRow({ result, idx }: { result: any; idx: number }) {
                 </td>
                 <td className="p-3 text-slate-700 text-xs leading-relaxed min-w-[260px]">
                     {result.clinical_recommendation.action}
-                    {result.clinical_recommendation.alternatives !== 'N/A' && (
+                    {result.clinical_recommendation.alternatives && result.clinical_recommendation.alternatives !== 'N/A' && (
                         <div className="mt-1 text-danger font-semibold">
                             Alternates: {result.clinical_recommendation.alternatives}
                         </div>
