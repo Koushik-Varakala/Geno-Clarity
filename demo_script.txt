@@ -1,39 +1,62 @@
-# GENO-CLARITY: Live Demonstration Guide
-
-Welcome to the live demo of GENO-CLARITY. This guide is tailored for both technical and clinical judges.
-
-## Prerequisites
-1. Ensure the Node.js server is running (`npm run dev`).
-2. Have the `test_data.vcf` file ready on your desktop.
-3. Obtain a valid GROQ API Key in the `.env` file (if you want live LLM generation).
+# 🧬 GENO-CLARITY: Presentation Guide
+*A step-by-step guide to explaining the platform to any audience, using simple analogies to explain complex genetics.*
 
 ---
 
-## Step 1: Privacy & Consent Wall
-*What to say:* "GENO-CLARITY prioritizes patient security. Before any genomic data touches the system, the client must explicitly acknowledge our Zero File Persistence policy. Data is parsed strictly in-memory over Vercel Edge compute."
-*Action:* Check all three consent boxes to proceed.
-
-## Step 2: The Upload Experience
-*What to say:* "We engineered an edge-compatible VCF parser. Instead of relying on heavy Python backends or cloud storage buckets, our system decrypts and parses the VCF in milliseconds directly within the serverless memory."
-*Action:* Drag and drag `test_data.vcf` onto the dropzone. Click 'Analyze'.
-
-## Step 3: Patient Dashboard (UI/UX Review)
-*What to say:* "As the results load, we are presented first with the Patient Dashboard. Note the use of accessible emojis, clear color coding, and plain-language analogies ('Speed Bumps Ahead' vs 'Roadblock'). Medical jargon is replaced by 'What this means for me' generated contextually by our integrated Groq LLaMA3 agent."
-*Action:* Scroll down. Focus on **Codeine** (shows RED for Ineffective) and **Fluorouracil** (shows RED for Toxic).
-*Context:* Codeine requires CYP2D6 to convert to morphine. The VCF has rs3892097 T/T (Poor metabolizer), meaning codeine does nothing. Fluorouracil has rs3918290 A/A (DPYD Poor Metabolizer), meaning 5-FU would be fatal.
-
-## Step 4: The Innovation - Digital Twin
-*What to say:* "By scrolling down, we interact with the Pharmacological Digital Twin. This WebAssembly-accelerated math model charts a mock 24-hour plasma concentration graph. If you select Fluorouracil, notice how the curve quickly penetrates the 'Toxicity' ceiling and stays there because the patient's DPYD enzyme cannot clear it."
-*Action:* Select different drugs from the dropdown and click 'Re-run Simulation' to watch the lines animate.
-
-## Step 5: Clinical View Toggle
-*What to say:* "A doctor needs different data points than a patient. Next to the GCI Badge at the top, we toggle to 'Clinical View'."
-*Action:* Click 'Clinical View' at the top right.
-*What to say:* "The dashboard instantly switches to a highly dense, CPIC-aligned table mapping rsIDs, exact diplotypes (e.g., *4/*4), phenotypes, and evidence grading. Below it, the Groq API provides deep pathway summaries for the physician."
-
-## Step 6: Export & Audit
-*What to say:* "Finally, this tool integrates directly into modern EHRs. We can download the structured JSON object which strictly conforms to FHIR-like interoperability schemas."
-*Action:* Click 'Download JSON Report'. Provide a brief glimpse at the downloaded file to show the structured schema output.
+## 🛑 Step 1: The Consent Page (Privacy First)
+**What to show:** The initial landing screen with the three checkboxes.
+**What to say:** 
+> "Welcome to Geno-Clarity. Before we even look at a single piece of DNA, we put patient privacy first. Genomic data is highly sensitive. Usually, when you upload a file to a website, it gets saved on their servers forever. 
+> 
+> Our system uses a **'Zero File Persistence'** policy. Think of it like a snapchat message for your DNA—the system reads the file to do the math, and the second it's done, the file vanishes. It's never saved to a database. You have to explicitly check these three boxes to confirm you understand this before we proceed."
 
 ---
-**End Demo.**
+
+## 📁 Step 2: The Upload Experience
+**What to show:** Dragging and dropping the `test_data.vcf` file into the upload box and clicking Analyze.
+**What to say:** 
+> "Here, a doctor or patient uploads a standard DNA file called a **VCF** (Variant Call Format). These files are usually massive and require supercomputers to read.
+> 
+> We built a custom parser that works instantly right here in the cloud. It scans through millions of lines of DNA in milliseconds, looking only for the specific 'spelling mistakes' in the genes that control how our bodies process medication."
+
+---
+
+## 👤 Step 3: Patient View Dashboard
+**What to show:** The results loading, scrolling down to focus on the drug cards (especially Fluorouracil and Codeine).
+**What to say:** 
+> "This is the **Patient Dashboard**. We purposefully designed this to look more like a friendly health app than a scary medical chart. We use simple color coding (Green is good, Red is danger) and easy-to-understand emojis.
+> 
+> Instead of using heavy medical jargon, our AI translates the genetic science into **analogies**. 
+> - *For example, look at Fluorouracil (a chemotherapy drug).* The AI explains that for this patient, their liver enzymes are like a **'closed tollbooth'**. The drug will cause a massive traffic jam in their bloodstream, leading to severe toxicity.
+> - *Look at Codeine (a painkiller).* Codeine is special—it only works if your body converts it into morphine. The AI explains that for this patient, the factory that does this conversion is 'shut down'. If they take codeine, it simply won't work. They'll just still be in pain."
+
+---
+
+## 📈 Step 4: The Pharmacological Digital Twin
+**What to show:** Scroll down to the interactive graph. Select different drugs from the dropdown to watch the line change.
+**What to say:** 
+> "This is our flagship feature: the **Pharmacological Digital Twin**. It's a live simulation of what happens inside this exact patient's body over 24 hours if they take a specific pill.
+> 
+> - The **Red Zone** at the top is toxicity (overdose).
+> - The **Blue Zone** at the bottom is ineffective (it doesn't work).
+> - The **Green Zone** in the middle is the 'Goldilocks zone' where the medicine actually heals you.
+> 
+> Watch what happens when I select Codeine. Because of their genetics, the line barely leaves the ground—it never reaches the green zone. If I select Fluorouracil, the line shoots straight up into the red toxicity zone and stays there, because their body cannot clear the drug out."
+
+---
+
+## 🩺 Step 5: Clinical View Toggle
+**What to show:** Scroll up to the top and click the "Clinical View" toggle button. Expand a row by clicking the `›` arrow.
+**What to say:** 
+> "But doctors need the hard science. When we flip this switch to **Clinical View**, the entire interface transforms for a medical professional. 
+> 
+> Here, a physician can see the exact DNA 'diplotype' (like `*4/*4`), the specific `rsID` mutations we found, and strict dosing guidelines based on international standards (CPIC). You can click on any row to expand it, revealing a deep, technical breakdown of the enzyme pathways and why the Digital Twin graph looks the way it does."
+
+---
+
+## 💾 Step 6: Export & Audit 
+**What to show:** Click the "Download JSON Report" button.
+**What to say:** 
+> "Finally, Geno-Clarity isn't meant to live in isolation. By clicking this button, the entire analysis is exported as a structured data file. This allows hospitals to instantly import these life-saving insights directly into the patient's Electronic Health Record (EHR) system. 
+> 
+> And that is Geno-Clarity: bringing precision medicine out of the lab and into the hands of patients and doctors."
